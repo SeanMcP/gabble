@@ -1,7 +1,9 @@
-const express = require("express")
-const User = require("../models/index").User
+const express = require('express')
+const models = require('../models/index')
+const User = require('../models/user');
+const Post = require('../models/post')
 const router = express.Router()
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcrypt')
 
 const passport = require('passport')
 
@@ -14,8 +16,8 @@ const isAuthenticated = function (req, res, next) {
     res.redirect('/')
   }
 
-router.get("/", function(req, res) {
-  res.render("index", {
+router.get('/', function(req, res) {
+  res.render('index', {
       messages: res.locals.getMessages()
   })
 })
@@ -26,16 +28,16 @@ router.post('/', passport.authenticate('local', {
     failureFlash: true
 }))
 
-router.get("/signup", function(req, res) {
-  res.render("signup")
+router.get('/signup', function(req, res) {
+  res.render('signup')
 })
 
-router.post("/signup", function(req, res) {
+router.post('/signup', function(req, res) {
   let username = req.body.username
   let password = req.body.password
 
   if (!username || !password) {
-    req.flash('error', "Please, fill in all the fields.")
+    req.flash('error', 'Please, fill in all the fields.')
     res.redirect('signup')
   }
 
@@ -48,21 +50,39 @@ router.post("/signup", function(req, res) {
     password: hashedPassword
   }
 
-  User.create(newUser).then(function() {
+  models.User.create(newUser).then(function() {
     res.redirect('/')
   }).catch(function(error) {
-    req.flash('error', "Please, choose a different username.")
+    req.flash('error', 'Please, choose a different username.')
     res.redirect('/signup')
   })
 })
 
-router.get("/user", isAuthenticated, function(req, res) {
-  res.render("user", {username: ''})
+router.get('/user', isAuthenticated, function(req, res) {
+  console.log('req.user.id: ', req.user.id);
+  models.Post.findAll({})
+  .then(function(data) {
+    res.render('user', { data: data })
+    console.log('data:\n', data)
+  })
 })
 
-router.get("/logout", function(req, res) {
+router.get('/logout', function(req, res) {
   req.logout()
-  res.redirect("/")
+  res.redirect('/')
+})
+
+router.post('/create', function(req, res) {
+  console.log('req.user.id: ', req.user.id);
+  models.Post.create({
+    user_id: req.user.id,
+    content: req.body.content,
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  })
+  .then(function(data) {
+    res.redirect('/')
+  })
 })
 
 

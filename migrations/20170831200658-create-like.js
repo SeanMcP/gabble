@@ -8,9 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      isLiked: {
-        type: Sequelize.BOOLEAN,
-        default: false
+      user_id: {
+        allowNull: false,
+        foreignKey: true,
+        type: Sequelize.INTEGER
+      },
+      post_id: {
+          allowNull: false,
+          foreignKey: true,
+          type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
