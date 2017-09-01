@@ -68,13 +68,13 @@ router.post('/signup', function(req, res) {
 
 router.get('/user', isAuthenticated, function(req, res) {
   models.Post.findAll({
-    // include: [{
-    //   model: models.User
-    // }]
-    // include: [ models.User ]
+    include: [{
+      model: models.User,
+      as: 'user'
+    }]
   })
   .then(function(data) {
-    // console.log('data:\n', data)
+    console.log('data.user:\n', data.user)
     res.render('user', { data: data })
   })
 })

@@ -6,11 +6,9 @@ module.exports = function(sequelize, DataTypes) {
   }, {})
 
   Like.associate = function(models) {
-    Like.belongsTo(models.User, { foreignKey: 'userId' })
-  }
+    Like.belongsTo(models.User, { as: "user", foreignKey: 'userId' })
 
-  Like.associate = function(models) {
-    Like.belongsTo(models.Post, { foreignKey: 'postId' })
+    Like.belongsTo(models.Post, { as: "post", foreignKey: 'postId' })
   }
 
   return Like;
