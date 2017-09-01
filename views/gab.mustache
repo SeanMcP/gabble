@@ -1,15 +1,12 @@
-{{username}}
-<form action="/create" method="post">
-  <textarea name="content" rows="8" cols="80"></textarea>
-  <button type="submit" name="button">Gab</button>
-</form>
-
 {{#data}}
   {{#dataValues}}
     {{#.}}
       <div class="gab">
         <p>{{content}}</p>
         <p><a href="/gab/{{id}}">{{createdAt}}</a></p>
+        {{#delete}}
+          <p><a href="/delete/{{id}}"><i class="material-icons">delete</i></a></p>
+        {{/delete}}
       </div>
     {{/.}}
   {{/dataValues}}

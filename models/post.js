@@ -2,15 +2,15 @@
 module.exports = function(sequelize, DataTypes) {
   var Post = sequelize.define('Post', {
     content: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
+    userId: DataTypes.INTEGER
   }, {})
 
   Post.associate = function(models) {
-    Post.belongsTo(models.User, { foreignKey: 'user_id' })
+    Post.belongsTo(models.User, { foreignKey: 'userId' })
   }
 
   Post.associate = function(models) {
-    Post.hasMany(models.Like, { as: 'Likes', foreignKey: 'post_id' })
+    Post.hasMany(models.Like, { foreignKey: 'postId' })
   }
 
   return Post;

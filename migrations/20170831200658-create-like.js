@@ -8,12 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         allowNull: false,
         foreignKey: true,
         type: Sequelize.INTEGER
       },
-      post_id: {
+      postId: {
           allowNull: false,
           foreignKey: true,
           type: Sequelize.INTEGER

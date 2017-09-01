@@ -1,16 +1,16 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Like = sequelize.define('Like', {
-    user_id: DataTypes.INTEGER,
-    post_id: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    postId: DataTypes.INTEGER
   }, {})
 
   Like.associate = function(models) {
-    Like.belongsTo(models.User, { foreignKey: 'user_id' })
+    Like.belongsTo(models.User, { foreignKey: 'userId' })
   }
 
   Like.associate = function(models) {
-    Like.belongsTo(models.Post, { foreignKey: 'post_id' })
+    Like.belongsTo(models.Post, { foreignKey: 'postId' })
   }
 
   return Like;

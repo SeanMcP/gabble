@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 const isAuthenticated = function (req, res, next) {
-  console.log(req.isAuthenticated())
+  // console.log(req.isAuthenticated())
     if (req.isAuthenticated()) {
       return next()
     }
@@ -35,35 +35,46 @@ router.get('/signup', function(req, res) {
 router.post('/signup', function(req, res) {
   let username = req.body.username
   let password = req.body.password
+  let confirm = req.body.confirm
+  let name = req.body.name
 
   if (!username || !password) {
     req.flash('error', 'Please, fill in all the fields.')
-    res.redirect('signup')
-  }
-
-  let salt = bcrypt.genSaltSync(10)
-  let hashedPassword = bcrypt.hashSync(password, salt)
-
-  let newUser = {
-    username: username,
-    salt: salt,
-    password: hashedPassword
-  }
-
-  models.User.create(newUser).then(function() {
-    res.redirect('/')
-  }).catch(function(error) {
-    req.flash('error', 'Please, choose a different username.')
     res.redirect('/signup')
-  })
+  } else if (password !== confirm) {
+    req.flash('error', 'Passwords to not match.')
+    res.redirect('/signup')
+  } else {
+
+    let salt = bcrypt.genSaltSync(10)
+    let hashedPassword = bcrypt.hashSync(password, salt)
+
+    let newUser = {
+      name: name,
+      username: username,
+      salt: salt,
+      password: hashedPassword
+    }
+
+    models.User.create(newUser).then(function() {
+      res.redirect('/')
+    }).catch(function(error) {
+      req.flash('error', 'Please, choose a different username.')
+      res.redirect('/signup')
+    })
+
+  }
 })
 
 router.get('/user', isAuthenticated, function(req, res) {
-  console.log('req.user.id: ', req.user.id);
-  models.Post.findAll({})
+  models.Post.findAll({
+    // include: [{
+    //   model: models.User
+    // }]
+  })
   .then(function(data) {
+    // console.log('data:\n', data)
     res.render('user', { data: data })
-    console.log('data:\n', data)
   })
 })
 
@@ -73,15 +84,43 @@ router.get('/logout', function(req, res) {
 })
 
 router.post('/create', function(req, res) {
-  console.log('req.user.id: ', req.user.id);
+  console.log('req.user.id: ', req.user.id)
   models.Post.create({
-    user_id: req.user.id,
+    userId: req.user.id,
     content: req.body.content,
     createdAt: Date.now(),
     updatedAt: Date.now()
   })
   .then(function(data) {
-    res.redirect('/')
+    res.redirect('/user')
+  })
+})
+
+router.get('/gab/:id', function(req, res) {
+  console.log('req.params.id: ', req.params.id);
+  models.Post.findOne({ where: { id: req.params.id } })
+  .then(function(data) {
+    console.log('DATA:\n', data);
+    console.log('data.userId: ', data.userId, '\n', 'req.user.id: ', req.user.id)
+    if (data.userId == req.user.id) {
+      res.render('gab', { data: data, delete: true })
+    } else {
+      res.render('gab', { data: data })
+    }
+  })
+  .catch(function(err) {
+    res.send(err)
+  })
+})
+
+router.get('/delete/:id', function(req, res) {
+  models.Post.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(function(data) {
+    res.redirect('/user')
   })
 })
 
