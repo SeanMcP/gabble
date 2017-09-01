@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
 
   User.associate = function(models) {
     User.hasMany(models.Post, { as: "posts", foreignKey: 'userId' })
-    
+
     User.hasMany(models.Like, { as: "likes", foreignKey: 'userId' })
   }
 

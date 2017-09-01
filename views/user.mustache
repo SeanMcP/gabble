@@ -8,9 +8,9 @@
   {{#dataValues}}
     {{#.}}
       <div class="gab">
-        <p><i class="material-icons">account_circle</i> {{userId}} (userId)</p>
+        <p><i class="material-icons amber">account_circle</i> {{user.name}} (user.name)</p>
         <p>{{content}}</p>
-        <p><a href="/gab/{{id}}">{{createdAt}}</a></p>
+        <p><a href="/gab/{{id}}">{{createdAt}}</a> | <a href="/like/{{id}}"><i class="material-icons">star_border</i>{{likes.length}}</a></p>
       </div>
     {{/.}}
   {{/dataValues}}

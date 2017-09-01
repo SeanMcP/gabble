@@ -8,6 +8,11 @@
           <p><a href="/delete/{{id}}"><i class="material-icons">delete</i></a></p>
         {{/delete}}
       </div>
+      {{#users}}
+        {{#.}}
+          {{name}}<br>
+        {{/.}}
+      {{/users}}
     {{/.}}
   {{/dataValues}}
 {{/data}}
