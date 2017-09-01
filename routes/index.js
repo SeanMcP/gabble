@@ -71,6 +71,7 @@ router.get('/user', isAuthenticated, function(req, res) {
     // include: [{
     //   model: models.User
     // }]
+    // include: [ models.User ]
   })
   .then(function(data) {
     // console.log('data:\n', data)
