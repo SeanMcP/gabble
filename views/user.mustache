@@ -1,17 +1,31 @@
-{{username}}
-<form action="/create" method="post">
-  <textarea name="content" rows="8" cols="80"></textarea>
-  <button type="submit" name="button">Gab</button>
-</form>
+<section class="banner">
+  <form id="composeGab" action="/create" method="post">
+    <textarea name="content" placeholder="What are you gabbing about?"></textarea>
+    <button type="submit" name="button">Gab</button>
+  </form>
+</section>
 
-{{#data}}
+<main id="feedContainer">
+  {{#data}}
   {{#dataValues}}
-    {{#.}}
-      <div class="gab">
-        <p><i class="material-icons amber">account_circle</i> {{user.name}} (user.name)</p>
-        <p>{{content}}</p>
-        <p><a href="/gab/{{id}}">{{createdAt}}</a> | <a href="/like/{{id}}"><i class="material-icons">star_border</i>{{likes.length}}</a></p>
+  {{#.}}
+  <article class="gab">
+    <header>
+      <a class="avatar" href="/{{user.username}}"><i class="material-icons amber">account_circle</i></a>
+      <a class="username" href="/{{user.username}}">{{user.name}}</a>
+    </header>
+    <main>
+      {{content}}
+    </main>
+    <footer>
+      <a href="/gab/{{id}}">{{createdAt}}</a>
+      <div class="likesContainer">
+        <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+        <p>{{likes.length}}</p>
       </div>
-    {{/.}}
+    </footer>
+  </article>
+  {{/.}}
   {{/dataValues}}
-{{/data}}
+  {{/data}}
+</main>

@@ -4,12 +4,23 @@
     <meta charset="utf-8">
     <title>Gabble</title>
     <link rel="stylesheet" href="/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Tammudu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Tammudu|Open+Sans:400,400i,600" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
     <div class="container">
-      <a href="/logout">Logout</a>
+      <header id="siteHeader">
+        <h1 id="logo">Gabber</h1>
+        <nav id="mainNav">
+          {{#user}}
+            <a href="/{{username}}">Profile</a>
+            <a href="/logout">Logout</a>
+          {{/user}}
+          {{^user}}
+            <a href="/login">Login</a>
+          {{/user}}
+        </nav>
+      </header>
       {{{yield}}}
     </div>
   </body>

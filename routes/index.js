@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 const isAuthenticated = function (req, res, next) {
-  // console.log(req.isAuthenticated())
     if (req.isAuthenticated()) {
       return next()
     }
@@ -18,6 +17,7 @@ const isAuthenticated = function (req, res, next) {
 
 router.get('/', function(req, res) {
   res.render('index', {
+      user: req.user,
       messages: res.locals.getMessages()
   })
 })
@@ -27,6 +27,13 @@ router.post('/', passport.authenticate('local', {
     failureRedirect: '/',
     failureFlash: true
 }))
+
+router.get('/login', function(req, res) {
+  res.render('index', {
+    user: req.user,
+    messages: res.locals.getMessages()
+  })
+})
 
 router.get('/signup', function(req, res) {
   res.render('signup')
@@ -67,6 +74,7 @@ router.post('/signup', function(req, res) {
 })
 
 router.get('/user', isAuthenticated, function(req, res) {
+  console.log(req.user);
   models.Post.findAll({
     order: [['createdAt', 'DESC']],
     include: [
@@ -87,9 +95,7 @@ router.get('/logout', function(req, res) {
 router.post('/create', function(req, res) {
   models.Post.create({
     userId: req.user.id,
-    content: req.body.content,
-    createdAt: Date.now(),
-    updatedAt: Date.now()
+    content: req.body.content
   })
   .then(function(data) {
     res.redirect('/user')
@@ -107,19 +113,20 @@ router.get('/gab/:id', function(req, res) {
   })
   .then(function(data) {
     let arr = [];
+
     data.likes.forEach(function(like){ arr.push(like.userId) })
-    console.log('arr', arr);
+
     models.User.findAll({ where: { id: arr } })
     .then(function(users) {
-      console.log('users: ', users)
-      res.render('gab', { data: data, users: users })
+      if (!req.user) {
+        res.render('gab', { data: data, users: users })
+      } else if (data.userId == req.user.id) {
+        res.render('gab', { data: data, users: users, delete: true })
+      } else {
+        res.render('gab', { data: data, users: users })
+      }
     })
-    // User.findAll()
-    // if (data.userId == req.user.id) {
-    //   res.render('gab', { data: data, delete: true })
-    // } else {
-    //   res.render('gab', { data: data })
-    // }
+
   })
   .catch(function(err) {
     res.send(err)
@@ -147,16 +154,15 @@ router.get('/like/:postId', function(req, res) {
       arr.push(user.userId)
     })
 
-    if (!arr.includes(req.user.id)) {
+    if (!req.user) {
+      console.log('Not logged in')
+    } else if (!arr.includes(req.user.id)) {
       models.Like.create({
         userId: req.user.id,
-        postId: req.params.postId,
-        createdAt: Date.now(),
-        updatedAt: Date.now()
+        postId: req.params.postId
       })
+      res.redirect('/user')
     }
-
-    res.redirect('/user')
   })
 })
 

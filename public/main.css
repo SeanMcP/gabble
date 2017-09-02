@@ -1,9 +1,125 @@
-.gab {
-  border: 1px solid lightgray;
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+
+/* BEGIN STYLES */
+body {
+  background: #FAFAFA;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+#siteHeader {
+  align-items: center;
+  background: linear-gradient(#FF8F00, #FFA000);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+#logo {
+  color: white;
+  font-family: 'Baloo Tammudu', cursive;
+  font-size: 2em;
+  margin-bottom: -14px;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+}
+#mainNav {
+  display: flex;
+  flex: 1 50%;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
+#mainNav a {
   border-radius: 3px;
-  margin: 10px;
+  color: white;
+  margin: 0 10px;
+  padding: 5px;
+  text-decoration: none;
+}
+#mainNav a:hover, #mainNav a:active {
+  background: rgba(0, 0, 0, 0.05);
+}
+.banner {
+  background: #FFF8E1;
+  border-bottom: 1px solid #FFE082;
+  padding-top: 10px;
+  width: 100%;
+}
+#composeGab {
+  background: #FFF8E1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  margin: 10px auto 20px;
+  max-width: 700px;
+  width: 100%;
+}
+#composeGab > * {
+  margin: 10px 20px 0;
+}
+#composeGab textarea {
+  background: white;
+  border: 1px solid #FFE082;
+  border-radius: 4px;
+  flex: 1 90%;
+  font-size: 1.5em;
   padding: 10px;
 }
-.amber {
-  color: #FFC107;
+#composeGab button {
+  background: #FFE082;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  max-width: 100px;
+  padding: 10px 20px;
+}
+#composeGab button:hover, #composeGab button:active {
+  background: linear-gradient(#FF8F00, #FFA000);
+}
+#feedContainer {
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 20px 0;
+  width: 100%;
+}
+.gab {
+  background: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 3px;
+  box-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.15);
+  margin: 20px;
+  padding: 20px;
+}
+.gab header {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.gab main {
+  font-size: 1.5em;
+  padding: 20px 0;
+}
+.avatar {
+  color: #FF8F00;
+  margin-right: 5px;
+}
+.username {
+  font-weight: 600;
+  text-decoration: none;
+}
+.gab footer {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.likesContainer {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-left: 10px;
+}
+.likesContainer a {
+  margin: 0 10px;
+}
+textarea {
+  resize: none;
 }
