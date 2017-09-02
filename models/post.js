@@ -6,9 +6,19 @@ module.exports = function(sequelize, DataTypes) {
   }, {})
 
   Post.associate = function(models) {
-    Post.belongsTo(models.User, { as: "user", foreignKey: 'userId' })
+    Post.belongsTo(models.User, {
+      as: "user",
+      foreignKey: 'userId'
+      // onDelete: 'cascade',
+      // hooks: true
+    })
 
-    Post.hasMany(models.Like, { as: "likes", foreignKey: 'postId' })
+    Post.hasMany(models.Like, {
+      as: "likes",
+      foreignKey: 'postId'
+      // onDelete: 'cascade',
+      // hooks: true
+    })
   }
 
   return Post;

@@ -74,7 +74,6 @@ router.post('/signup', function(req, res) {
 })
 
 router.get('/user', isAuthenticated, function(req, res) {
-  console.log(req.user);
   models.Post.findAll({
     order: [['createdAt', 'DESC']],
     include: [
@@ -134,13 +133,20 @@ router.get('/gab/:id', function(req, res) {
 })
 
 router.get('/delete/:id', function(req, res) {
-  models.Post.destroy({
+  models.Like.destroy({
     where: {
-      id: req.params.id
+      postId: req.params.id
     }
   })
-  .then(function(data) {
-    res.redirect('/user')
+  .then(function(likes) {
+    models.Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function(data) {
+      res.redirect('/user')
+    })
   })
 })
 
