@@ -172,6 +172,27 @@ router.get('/like/:postId', function(req, res) {
   })
 })
 
+router.get('/:username', function(req, res) {
+  models.User.findOne({
+    where: {
+      username: req.params.username
+    },
+    include: [
+      { model: models.Post, as: 'posts' }
+    ]
+  })
+  .then(function(data) {
+    // console.log('The data.posts[0].content:\n', data.posts[0].content);
+    if(!req.user) {
+      res.render('profile', { data: data , posts: data.posts })
+    } else if (req.user.username == req.params.username) {
+      res.render('profile', { data: data , posts: data.posts, owner: true })
+    } else {
+      res.render('profile', { data: data , posts: data.posts })
+    }
+  })
+})
+
 
 
 module.exports = router

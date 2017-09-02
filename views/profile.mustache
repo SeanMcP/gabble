@@ -1,0 +1,40 @@
+{{#owner}}
+  <section class="banner">
+    <form id="composeGab" action="/create" method="post">
+      <textarea name="content" placeholder="What are you gabbing about?"></textarea>
+      <button type="submit" name="button">Gab</button>
+    </form>
+  </section>
+{{/owner}}
+
+<aside id="userProfile">
+  {{#data}}
+    {{name}}<br>
+    @{{username}}
+  {{/data}}
+</aside>
+
+<main id="feedContainer">
+  {{#posts}}
+      {{#.}}
+        <article class="gab">
+          <header>
+            {{#data}}
+              <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
+              <a class="username" href="/{{username}}">{{name}}</a>
+            {{/data}}
+          </header>
+          <main>
+            {{content}}
+          </main>
+          <footer>
+            <a href="/gab/{{id}}">{{createdAt}}</a>
+            <div class="likesContainer">
+              <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+              <p>{{likes.length}}</p>
+            </div>
+          </footer>
+        </article>
+    {{/.}}
+  {{/posts}}
+</main>
