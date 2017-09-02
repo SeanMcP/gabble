@@ -47,7 +47,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
-  margin: 10px auto 20px;
+  margin: 0 auto 20px;
   max-width: 700px;
   width: 100%;
 }
@@ -78,7 +78,7 @@ body {
 #feedContainer {
   margin: 0 auto;
   max-width: 700px;
-  padding: 20px 0;
+  padding: 0 0 20px;
   width: 100%;
 }
 .gab {
@@ -123,3 +123,32 @@ body {
 textarea {
   resize: none;
 }
+
+/*********************
+  User Profile
+ ********************/
+
+ #profileContainer {
+   display: flex;
+   flex-flow: row nowrap;
+   justify-content: flex-start;
+ }
+ #userProfile {
+   margin-right: 0;
+   max-width: 33.3%;
+ }
+ #userProfile h3 {
+   font-size: 1.5em;
+ }
+ #userProfile i {
+   margin-right: 5px;
+ }
+ #userProfile p {
+   margin: 10px 0;
+   line-height: 125%;
+ }
+ #userProfile li {
+   display: flex;
+   flex-flow: row nowrap;
+   align-items: center;
+ }

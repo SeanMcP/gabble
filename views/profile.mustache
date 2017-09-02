@@ -7,34 +7,43 @@
   </section>
 {{/owner}}
 
-<aside id="userProfile">
-  {{#data}}
-    {{name}}<br>
-    @{{username}}
-  {{/data}}
-</aside>
+<section id="profileContainer">
+  <aside id="userProfile" class="gab">
+    {{#data}}
+      <h3>{{name}}</h3>
+      <h4>@{{username}}</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <ul>
+        <li><i class="material-icons">location_on</i> Location</li>
+        <li><i class="material-icons">link</i> Website</li>
+      </ul>
+    {{/data}}
+  </aside>
 
-<main id="feedContainer">
-  {{#posts}}
-      {{#.}}
-        <article class="gab">
-          <header>
-            {{#data}}
-              <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
-              <a class="username" href="/{{username}}">{{name}}</a>
-            {{/data}}
-          </header>
-          <main>
-            {{content}}
-          </main>
-          <footer>
-            <a href="/gab/{{id}}">{{createdAt}}</a>
-            <div class="likesContainer">
-              <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
-              <p>{{likes.length}}</p>
-            </div>
-          </footer>
-        </article>
+  <main id="feedContainer">
+    {{#posts}}
+    {{#.}}
+    <article class="gab">
+      <header>
+        {{#data}}
+        <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
+        <a class="username" href="/{{username}}">{{name}}</a>
+        {{/data}}
+      </header>
+      <main>
+        {{content}}
+      </main>
+      <footer>
+        <a href="/gab/{{id}}">{{createdAt}}</a>
+        <div class="likesContainer">
+          <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+          {{#data}}
+            <p>{{likes.length}}</p>
+          {{/data}}
+        </div>
+      </footer>
+    </article>
     {{/.}}
-  {{/posts}}
-</main>
+    {{/posts}}
+  </main>
+</section>

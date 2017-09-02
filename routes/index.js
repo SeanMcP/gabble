@@ -178,17 +178,27 @@ router.get('/:username', function(req, res) {
       username: req.params.username
     },
     include: [
-      { model: models.Post, as: 'posts' }
+      { model: models.Post, as: 'posts' },
+      { model: models.Like, as: 'likes' }
     ]
   })
   .then(function(data) {
-    // console.log('The data.posts[0].content:\n', data.posts[0].content);
+    // console.log('The data:\n', data);
     if(!req.user) {
-      res.render('profile', { data: data , posts: data.posts })
+      res.render('profile', {
+        data: data,
+        posts: data.posts
+      })
     } else if (req.user.username == req.params.username) {
-      res.render('profile', { data: data , posts: data.posts, owner: true })
+      res.render('profile', {
+        data: data,
+        posts: data.posts,
+        owner: true
+      })
     } else {
-      res.render('profile', { data: data , posts: data.posts })
+      res.render('profile', {
+        data: data,
+        posts: data.posts})
     }
   })
 })
