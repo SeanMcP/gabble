@@ -16,14 +16,24 @@ const isAuthenticated = function (req, res, next) {
   }
 
 router.get('/', function(req, res) {
-  res.render('index', {
+  models.Post.findAll({
+    order: [['createdAt', 'DESC']],
+    include: [
+      { model: models.User, as: 'user' },
+      { model: models.Like, as: 'likes' }
+    ]
+  })
+  .then(function(data) {
+    res.render('feed', {
+      data: data,
       user: req.user,
       messages: res.locals.getMessages()
+    })
   })
 })
 
 router.post('/', passport.authenticate('local', {
-    successRedirect: '/user',
+    successRedirect: '/feed',
     failureRedirect: '/',
     failureFlash: true
 }))
@@ -73,7 +83,7 @@ router.post('/signup', function(req, res) {
   }
 })
 
-router.get('/user', isAuthenticated, function(req, res) {
+router.get('/feed', isAuthenticated, function(req, res) {
   models.Post.findAll({
     order: [['createdAt', 'DESC']],
     include: [
@@ -82,7 +92,7 @@ router.get('/user', isAuthenticated, function(req, res) {
     ]
   })
   .then(function(data) {
-    res.render('user', { data: data })
+    res.render('feed', { data: data })
   })
 })
 
@@ -97,7 +107,7 @@ router.post('/create', function(req, res) {
     content: req.body.content
   })
   .then(function(data) {
-    res.redirect('/user')
+    res.redirect('/feed')
   })
 })
 
@@ -145,7 +155,7 @@ router.get('/delete/:id', function(req, res) {
       }
     })
     .then(function(data) {
-      res.redirect('/user')
+      res.redirect('/feed')
     })
   })
 })
@@ -167,7 +177,7 @@ router.get('/like/:postId', function(req, res) {
         userId: req.user.id,
         postId: req.params.postId
       })
-      res.redirect('/user')
+      res.redirect('/feed')
     }
   })
 })

@@ -24,14 +24,15 @@
       {{/.}}
     {{/dataValues}}
   {{/data}}
-  {{#users}}
-    <ul>
-      {{#.}}
-        <li>
-          <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
-          <a class="username" href="/{{username}}">{{name}}</a>
-        </li>
-      {{/.}}
-    </ul>
-  {{/users}}
+    <div id="likedBy">
+      <h4>Liked by</h4>
+      <ul>
+        {{#users}}
+          <li>
+            <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
+            <a class="username" href="/{{username}}">{{name}}</a>
+          </li>
+        {{/users}}
+      </ul>
+    </div>
 </main>

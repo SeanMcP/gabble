@@ -5,6 +5,9 @@ body {
   background: #FAFAFA;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
+a {
+  text-decoration: none;
+}
 #siteHeader {
   align-items: center;
   background: linear-gradient(#FF8F00, #FFA000);
@@ -120,35 +123,52 @@ body {
 .likesContainer a {
   margin: 0 10px;
 }
-textarea {
+.gab textarea {
   resize: none;
+}
+
+#likedBy {
+  background: #FFF8E1;
+  border: 1px solid #FFE082;
+  border-radius: 2px;
+  margin: 10px 40px;
+}
+#likedBy > * {
+  margin: 10px;
+}
+#likedBy li {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 /*********************
   User Profile
  ********************/
 
- #profileContainer {
-   display: flex;
-   flex-flow: row nowrap;
-   justify-content: flex-start;
- }
- #userProfile {
-   margin-right: 0;
-   max-width: 33.3%;
- }
- #userProfile h3 {
-   font-size: 1.5em;
- }
- #userProfile i {
-   margin-right: 5px;
- }
- #userProfile p {
-   margin: 10px 0;
-   line-height: 125%;
- }
- #userProfile li {
-   display: flex;
-   flex-flow: row nowrap;
-   align-items: center;
- }
+#profileContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+#userProfile {
+  margin-right: 0;
+  max-width: 25%;
+}
+#userProfile h3 {
+  font-size: 1.5em;
+  padding-bottom: 5px;
+}
+#userProfile i {
+  margin-right: 5px;
+}
+#userProfile p {
+  margin: 10px 0;
+  line-height: 125%;
+}
+#userProfile li {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 15px;
+}
