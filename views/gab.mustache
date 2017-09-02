@@ -11,9 +11,12 @@
             {{content}}
           </main>
           <footer>
-            <a href="/gab/{{id}}">{{createdAt}}</a>
-            <div class="likesContainer">
-              <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+            <div>
+              <a class="clock-button" href="/gab/{{id}}"><i class="material-icons">schedule</i></a>
+              <a href="/gab/{{id}}">{{createdAt}}</a>
+            </div>
+            <div>
+              <a class="like-button" href="/like/{{id}}"><i class="material-icons">star_border</i></a>
               <p>{{likes.length}}</p>
               {{#delete}}
                 <a href="/delete/{{id}}"><i class="material-icons">delete</i></a>
@@ -24,7 +27,7 @@
       {{/.}}
     {{/dataValues}}
   {{/data}}
-    <div id="likedBy">
+    <div class="likedBy">
       <h4>Liked by</h4>
       <ul>
         {{#users}}
@@ -32,6 +35,9 @@
             <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
             <a class="username" href="/{{username}}">{{name}}</a>
           </li>
+        {{/users}}
+        {{^users}}
+          <p>No one (yet!)</p>
         {{/users}}
       </ul>
     </div>

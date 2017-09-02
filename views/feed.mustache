@@ -20,9 +20,12 @@
       {{content}}
     </main>
     <footer>
-      <a href="/gab/{{id}}">{{createdAt}}</a>
-      <div class="likesContainer">
-        <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+      <div>
+        <a class="clock-button" href="/gab/{{id}}"><i class="material-icons">schedule</i></a>
+        <a href="/gab/{{id}}">{{createdAt}}</a>
+      </div>
+      <div>
+        <a class="like-button" href="/like/{{id}}"><i class="material-icons">star_border</i></a>
         <p>{{likes.length}}</p>
       </div>
     </footer>

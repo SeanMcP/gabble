@@ -6,7 +6,11 @@ body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 a {
+  color: #FF8F00;
   text-decoration: none;
+}
+a:active, a:hover {
+  color: #FFA000;
 }
 #siteHeader {
   align-items: center;
@@ -66,7 +70,7 @@ a {
   padding: 10px;
 }
 #composeGab button {
-  background: #FFE082;
+  background: #FFC107;
   border: none;
   border-radius: 20px;
   color: white;
@@ -111,32 +115,40 @@ a {
 }
 .gab footer {
   align-items: center;
+  border-top: 1px solid #EEEEEE;
+  color: #999;
   display: flex;
   flex-flow: row nowrap;
+  padding-top: 20px;
 }
-.likesContainer {
+.gab footer div {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  margin-left: 10px;
+  font-size: 0.9em;
+  margin-right: 10px;
 }
-.likesContainer a {
-  margin: 0 10px;
+.gab footer div a {
+  color: #999;
+  margin-right: 10px;
 }
 .gab textarea {
   resize: none;
 }
+.like-button:hover, .like-button:active {
+  color: #FFC400;
+}
 
-#likedBy {
+.likedBy {
   background: #FFF8E1;
   border: 1px solid #FFE082;
   border-radius: 2px;
   margin: 10px 40px;
 }
-#likedBy > * {
+.likedBy > * {
   margin: 10px;
 }
-#likedBy li {
+.likedBy li {
   align-items: center;
   display: flex;
   flex-flow: row nowrap;
