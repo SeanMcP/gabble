@@ -25,27 +25,13 @@
     {{/dataValues}}
   {{/data}}
   {{#users}}
-    {{#.}}
-      {{name}}<br>
-    {{/.}}
+    <ul>
+      {{#.}}
+        <li>
+          <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
+          <a class="username" href="/{{username}}">{{name}}</a>
+        </li>
+      {{/.}}
+    </ul>
   {{/users}}
 </main>
-
-<!-- {{#data}}
-  {{#dataValues}}
-    {{#.}}
-      <div class="gab">
-        <p>{{content}}</p>
-        <p><a href="/gab/{{id}}">{{createdAt}}</a></p>
-        {{#delete}}
-          <p><a href="/delete/{{id}}"><i class="material-icons">delete</i></a></p>
-        {{/delete}}
-      </div>
-      {{#users}}
-        {{#.}}
-          {{name}}<br>
-        {{/.}}
-      {{/users}}
-    {{/.}}
-  {{/dataValues}}
-{{/data}} -->
