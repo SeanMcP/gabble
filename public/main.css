@@ -15,7 +15,6 @@ a:active, a:hover {
 #siteHeader {
   align-items: center;
   background: linear-gradient(#FF8F00, #FFA000);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -187,6 +186,10 @@ a:active, a:hover {
   margin-top: 15px;
 }
 
+/*********************
+  Login and Sign up
+ ********************/
+
 .photoContainer {
   background: url('/img/background.jpg') center center no-repeat;
   background-attachment: fixed;
@@ -240,9 +243,26 @@ a:active, a:hover {
   opacity: 1;
 }
 .loginAlt {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 3px;
   color: white;
+  margin: 10px 10px 0;
+  padding: 10px;
+  text-align: center;
+}
+
+.loginContainer h2 {
+  color: #FF8F00;
+  font-size: 2em;
+  font-style: italic;
+  padding: 40px 0;
+  text-align: center;
+}
+.signup input {
+  border: 1px solid #EEEEEE;
+  opacity: 1;
+}
+.signupAlt {
   margin: 10px 10px 0;
   padding: 10px;
   text-align: center;

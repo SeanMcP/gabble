@@ -1,7 +1,14 @@
-<form class="" action="/signup" method="post">
-  <input type="text" name="name" value="" placeholder="Name">
-  <input type="text" name="username" value="" placeholder="Username">
-  <input type="password" name="password" value="" placeholder="Password">
-  <input type="password" name="confirm" value="" placeholder="Confirm password">
-  <button type="submit" name="button">Sign Up</button>
-</form>
+<section class="loginContainer">
+  <h2>Create an account</h2>
+  <form class="login signup" action="/signup" method="post">
+    <input type="text" name="name" value="" placeholder="Name">
+    <input type="text" name="username" value="" placeholder="Username">
+    <input type="password" name="password" value="" placeholder="Password">
+    <input type="password" name="confirm" value="" placeholder="Confirm password">
+    <button type="submit" name="button">Sign Up</button>
+  </form>
+  <p class="signupAlt">Already have an account? <a href="/login">Login!</a></p>
+  {{#message}}
+  {{.}}
+  {{/message}}
+</section>
