@@ -1,45 +1,46 @@
-const express = require("express");
-const mustacheExpress = require("mustache-express");
-const path = require("path");
-const routes = require("./routes/index");
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
-const flash = require('express-flash-messages');
-const model = require("./models/index");
-const bcrypt = require("bcrypt");
+const express = require('express')
+const mustacheExpress = require('mustache-express')
+const expressValidator = require('express-validator')
+const path = require('path')
+const routes = require('./routes/index')
+const morgan = require('morgan')
+const bodyParser = require('body-parser')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const session = require('express-session')
+const flash = require('express-flash-messages')
+const model = require('./models/index')
+const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
-const app = express();
+const app = express()
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.engine("mustache", mustacheExpress());
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "mustache");
-app.set("layout", "layout");
+app.engine('mustache', mustacheExpress())
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'mustache')
+app.set('layout', 'layout')
 
 app.use(bodyParser.urlencoded({
-    extended: false
-}));
+  extended: false
+}))
 
-app.use(morgan("dev"));
+app.use(morgan('dev'))
 
 app.use(cookieParser())
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-}));
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}))
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(flash())
 app.use(function(req, res, next) {
-    res.locals.errorMessage = req.flash('error')
-    next()
-});
+  res.locals.errorMessage = req.flash('error')
+  next()
+})
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -82,12 +83,13 @@ passport.deserializeUser(function(id, done) {
 })
 
 app.use(function (req, res, next) {
-  res.locals.user = req.user;
-  next();
+  res.locals.user = req.user
+  next()
 })
 
-app.use(routes);
+app.use(expressValidator())
+app.use(routes)
 
 app.listen(3000, function() {
-  console.log("App is running on localhost:3000");
-});
+  console.log('App is running on localhost:3000')
+})
