@@ -107,7 +107,7 @@ router.post('/create', function(req, res) {
     content: req.body.content
   })
   .then(function(data) {
-    res.redirect('/feed')
+    res.redirect('back')
   })
 })
 
