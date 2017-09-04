@@ -1,5 +1,5 @@
 {
-  "name": "lecture",
+  "name": "Gabber",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tiy-atl-july-2017/passport_auth.git"
+    "url": "git+https://github.com/SeanMcP/gabble.git"
   },
-  "author": "",
+  "author": "Sean McPherson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tiy-atl-july-2017/passport_auth/issues"
+    "url": "https://github.com/SeanMcP/gabble/issues"
   },
-  "homepage": "https://github.com/tiy-atl-july-2017/passport_auth#readme",
+  "homepage": "https://github.com/SeanMcP/gabble#readme",
   "dependencies": {
     "bcrypt": "1.0.3",
     "bcryptjs": "2.4.3",
