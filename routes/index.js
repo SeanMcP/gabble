@@ -44,7 +44,7 @@ router.get('/login', function(req, res) {
 })
 
 router.get('/signup', function(req, res) {
-  res.render('signup', { messages: req.session.messages })
+  res.render('signup', { messages: res.locals.getMessages() })
 })
 
 router.post('/signup', async function(req, res) {
@@ -56,13 +56,21 @@ router.post('/signup', async function(req, res) {
   req.checkBody('password', 'Passwords should be between 4 and 20 characters').len(4, 20)
 
   let errors = await req.getValidationResult()
+
+  console.log('what are "errors.array"', errors.array);
+  // errors.forEach(function(error) {
+  //   req.flash('error', error.msg)
+  // })
+
   let messages = errors.array().map(function(error){
     return error.msg
   })
 
-  req.session.messages = messages
+  errors.array().map(function(error){
+    req.flash('error', error.msg)
+  })
 
-  console.log('Are they recognized as errors?\n', messages);
+  // res.locals.getMessages().error = messages
 
   let username = req.body.username.toLowerCase()
   let password = req.body.password
@@ -70,16 +78,15 @@ router.post('/signup', async function(req, res) {
   let name = req.body.name
 
   if (!username || !password) {
-    req.session.messages = []
-    req.session.messages.push('Please fill in all the fields')
+    res.flash('error', 'Please fill in all the fields')
     res.redirect('/signup')
   } else if (password !== confirm) {
     req.flash('error', 'Passwords to not match.')
 
-    req.session.messages.push('Passwords to not match')
+    // req.session.messages.push('Passwords to not match')
 
     res.redirect('/signup')
-  } else if (req.session.messages.length >= 1) {
+  } else if (messages.length >= 1) {
     res.redirect('/signup')
   } else {
 
@@ -193,7 +200,7 @@ router.get('/like/:postId', function(req, res) {
     })
 
     if (!req.user) {
-      console.log('Not logged in')
+      res.flash('error', 'Not logged in')
     } else if (!arr.includes(req.user.id)) {
 
       models.Like.create({
@@ -213,7 +220,7 @@ router.get('/like/:postId', function(req, res) {
           plain: true
         })
         .then(function(result) {
-          res.redirect('back')
+          res.redirect('/gab/' + req.params.postId)
         })
       })
     }

@@ -50,7 +50,7 @@ passport.use(new LocalStrategy(
       }
     }).then(function (user) {
       if (user == null) {
-        return done(null, false, { message: 'Invalid email and/or password. Please try again.' })
+        return done(null, false, { message: 'Invalid email and/or password: please try again' })
       }
 
       let hashedPassword = bcrypt.hashSync(password, user.salt)
@@ -59,7 +59,7 @@ passport.use(new LocalStrategy(
         return done(null, user)
       }
 
-      return done(null, false, { message: 'Incorrect credentials.' })
+      return done(null, false, { message: 'Invalid email and/or password: please try again' })
     })
   }
 ))
@@ -75,7 +75,7 @@ passport.deserializeUser(function(id, done) {
     }
   }).then(function (user) {
     if (user == null) {
-      done(new Error('Wrong user id.'))
+      done(new Error('Wrong user id'))
     }
 
     done(null, user)
