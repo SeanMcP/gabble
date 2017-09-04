@@ -55,22 +55,14 @@ router.post('/signup', async function(req, res) {
   req.checkBody('username', 'Usernames should be between 4 and 20 characters').len(4, 20)
   req.checkBody('password', 'Passwords should be between 4 and 20 characters').len(4, 20)
 
+  let isError = false
+
   let errors = await req.getValidationResult()
 
-  console.log('what are "errors.array"', errors.array);
-  // errors.forEach(function(error) {
-  //   req.flash('error', error.msg)
-  // })
-
-  let messages = errors.array().map(function(error){
-    return error.msg
-  })
-
   errors.array().map(function(error){
+    isError = true
     req.flash('error', error.msg)
   })
-
-  // res.locals.getMessages().error = messages
 
   let username = req.body.username.toLowerCase()
   let password = req.body.password
@@ -83,10 +75,8 @@ router.post('/signup', async function(req, res) {
   } else if (password !== confirm) {
     req.flash('error', 'Passwords to not match.')
 
-    // req.session.messages.push('Passwords to not match')
-
     res.redirect('/signup')
-  } else if (messages.length >= 1) {
+  } else if (isError) {
     res.redirect('/signup')
   } else {
 
