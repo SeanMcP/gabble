@@ -11,10 +11,13 @@
   <div id="userProfile">
     <aside class="gab">
       {{#data}}
-      <h3>{{name}}</h3>
-      <h4>@{{username}}</h4>
-      <!-- <p>{{bio}}</p>
-      <p><i class="material-icons">location_on</i>{{location}}</p> -->
+        <h3>{{name}}</h3>
+        <h4>@{{username}}</h4>
+        <!-- <p>{{bio}}</p>
+        <p><i class="material-icons">location_on</i>{{location}}</p> -->
+        {{#owner}}
+          <a href="/editprofile"><i class="material-icons">edit</i>Edit profile</a>
+        {{/owner}}
       {{/data}}
     </aside>
   </div>

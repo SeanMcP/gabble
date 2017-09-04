@@ -184,7 +184,7 @@ router.get('/like/:postId', function(req, res) {
       models.Post.findOne({ where: { id: req.params.postId} })
 
       .then(function(post) {
-        
+
         newLikeCount = post.likeCount + 1;
 
         models.Post.update({ "likeCount": newLikeCount }, {
@@ -213,7 +213,7 @@ router.get('/:username', function(req, res) {
     ]
   })
   .then(function(data) {
-    console.log('Data.posts from user page:\n', data.posts);
+
     if(!req.user) {
       res.render('profile', {
         data: data,
