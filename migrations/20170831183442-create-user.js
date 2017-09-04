@@ -19,7 +19,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(144)
+      },
+      bio: {
+        type: Sequelize.STRING(144)
+      },
+      location: {
+        type: Sequelize.STRING(144)
       },
       createdAt: {
         allowNull: false,

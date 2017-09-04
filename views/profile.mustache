@@ -8,17 +8,16 @@
 {{/owner}}
 
 <section id="profileContainer">
-  <aside id="userProfile" class="gab">
-    {{#data}}
+  <div id="userProfile">
+    <aside class="gab">
+      {{#data}}
       <h3>{{name}}</h3>
       <h4>@{{username}}</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <ul>
-        <li><i class="material-icons">location_on</i> Location</li>
-        <li><i class="material-icons">link</i> Website</li>
-      </ul>
-    {{/data}}
-  </aside>
+      <!-- <p>{{bio}}</p>
+      <p><i class="material-icons">location_on</i>{{location}}</p> -->
+      {{/data}}
+    </aside>
+  </div>
 
   <main id="feedContainer">
     {{#posts}}
