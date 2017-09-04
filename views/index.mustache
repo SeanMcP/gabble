@@ -1,16 +1,16 @@
 <section class="photoContainer">
   <section class="colorContainer">
     <section class="loginContainer">
-      <h1>What the world is talking about</h1>
+      <h1>Join the conversation</h1>
       <form class="login" action="/" method="post">
         <input type="text" name="username" value="" placeholder="Username">
         <input type="password" name="password" value="" placeholder="Password">
         <button type="submit" name="button">Login</button>
       </form>
       <p class="loginAlt">Don't have an account? <a href="/signup">Sign up!</a></p>
-      {{#message}}
-      {{.}}
-      {{/message}}
+      {{#messages.error}}
+        <p>{{.}}</p>
+      {{/messages.error}}
     </section>
   </section>
 </section>

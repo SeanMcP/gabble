@@ -27,18 +27,20 @@ router.get('/', function(req, res) {
     res.render('feed', {
       data: data,
       user: req.user,
-      messages: res.locals.getMessages()
+      messages: res.locals.getMessages(),
     })
   })
 })
 
 router.post('/', passport.authenticate('local', {
     successRedirect: '/feed',
-    failureRedirect: '/',
+    failureRedirect: '/login',
     failureFlash: true
 }))
-
+let errArr
 router.get('/login', function(req, res) {
+  console.log('res.locals.getMessages().error: ', res.locals.getMessages().error);
+
   res.render('index', {
     user: req.user,
     messages: res.locals.getMessages()
@@ -60,6 +62,7 @@ router.post('/signup', function(req, res) {
     res.redirect('/signup')
   } else if (password !== confirm) {
     req.flash('error', 'Passwords to not match.')
+    res.locals.
     res.redirect('/signup')
   } else {
 
