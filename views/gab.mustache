@@ -18,10 +18,10 @@
             <div>
               <a class="like-button" href="/like/{{id}}"><i class="material-icons">star_border</i></a>
               <p>{{likes.length}}</p>
-              {{#delete}}
-                <a href="/delete/{{id}}"><i class="material-icons">delete</i></a>
-              {{/delete}}
             </div>
+            {{#delete}}
+            <a class="delete-button" href="/delete/{{id}}" title="Caution: This cannot be undone"><i class="material-icons">delete</i></a>
+            {{/delete}}
           </footer>
         </article>
       {{/.}}

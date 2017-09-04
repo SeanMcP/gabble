@@ -193,7 +193,7 @@ router.get('/like/:postId', function(req, res) {
           plain: true
         })
         .then(function(result) {
-          res.send(results)
+          res.send(result)
         })
       })
 

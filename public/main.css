@@ -104,6 +104,7 @@ a:active, a:hover {
 }
 .gab main {
   font-size: 1.5em;
+  line-height: 125%;
   padding: 20px 0;
 }
 .avatar {
@@ -129,7 +130,7 @@ a:active, a:hover {
   font-size: 0.9em;
   margin-right: 10px;
 }
-.gab footer div a {
+.gab footer a {
   color: #999;
   margin-right: 10px;
 }
@@ -138,6 +139,14 @@ a:active, a:hover {
 }
 .like-button:hover, .like-button:active {
   color: #FFC400;
+}
+.gab footer a.delete-button {
+  flex: 1 20%;
+  margin-right: 0;
+  text-align: right;
+}
+.delete-button:hover, .delete-button:active {
+  color: red
 }
 
 .likedBy {
@@ -165,8 +174,11 @@ a:active, a:hover {
   justify-content: flex-start;
 }
 #userProfile {
-  margin-right: 0;
+  min-width: 250px;
   width: 30%;
+}
+aside.gab {
+  margin-right: 0;
 }
 #userProfile h3, input[name="name"] {
   font-size: 1.5em;
