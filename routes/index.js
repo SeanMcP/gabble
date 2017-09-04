@@ -8,14 +8,22 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 const isAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-    req.flash('error', 'You have to be logged in to access the page.')
-    res.redirect('/')
+  if (req.isAuthenticated()) {
+    return next()
   }
+  req.flash('error', 'You have to be logged in to access the page.')
+  res.redirect('/')
+}
 
-router.get('/', function(req, res) {
+const loginAuthCheck = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.redirect('/feed')
+  }
+  req.flash('error', 'You have to be logged in to access the page.')
+  res.redirect('/')
+}
+
+router.get('/', loginAuthCheck, function(req, res) {
   res.render('login', {
     user: req.user,
     messages: res.locals.getMessages()
