@@ -11,17 +11,15 @@
   <div id="userProfile">
     <aside class="gab">
       {{#data}}
-        <h3>{{name}}</h3>
-        <h4>@{{username}}</h4>
-        {{#bio}}
-          <p>{{bio}}</p>
-        {{/bio}}
-        {{#location}}
-          <p><i class="material-icons">location_on</i>{{location}}</p>
-        {{/location}}
-        {{#owner}}
-          <a class="align-center" href="/{{username}}/edit"><i class="material-icons">edit</i>Edit profile</a>
-        {{/owner}}
+        <form class="editProfile" action="/{{username}}/edit" method="post">
+          <input type="text" name="name" value="{{name}}" placeholder="Display name">
+          <h4>@{{username}}</h4>
+          <textarea class="p" name="bio" placeholder="Bio">{{bio}}</textarea>
+          <label for="location"><i class="material-icons">location_on</i></label>
+          <input type="text" name="location" value="{{location}}" placeholder="Location">
+          <p><a href="/{{username}}"><i class="material-icons">undo</i> Undo</a></p>
+          <button type="submit" name="editProfile"><i class="material-icons">save</i>Save</button>
+        </form>
       {{/data}}
     </aside>
   </div>

@@ -157,7 +157,7 @@ a:active, a:hover {
 
 /*********************
   User Profile
- ********************/
+*********************/
 
 #profileContainer {
   display: flex;
@@ -166,16 +166,16 @@ a:active, a:hover {
 }
 #userProfile {
   margin-right: 0;
-  max-width: 30%;
+  width: 30%;
 }
-#userProfile h3 {
+#userProfile h3, input[name="name"] {
   font-size: 1.5em;
   padding-bottom: 5px;
 }
 #userProfile i {
   margin-right: 5px;
 }
-#userProfile p {
+#userProfile p, textarea[name="bio"] {
   margin: 10px 0;
   line-height: 125%;
 }
@@ -185,10 +185,61 @@ a:active, a:hover {
   flex-flow: row nowrap;
   margin-top: 15px;
 }
+.align-center {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+/*********************
+  Edit profile
+*********************/
+
+.editProfile {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.editProfile input, .editProfile textarea {
+  background: #f1f1f1;
+  color: #333;
+  padding: 0;
+}
+.editProfile * {
+  border: none;
+  font-family: 'Open Sans';
+  font-size: 1em;
+}
+input[name="name"] {
+  flex: 1 100%;
+}
+textarea[name="bio"] {
+  flex: 1 100%;
+  font-size: 1em;
+}
+input[name="location"] {
+  flex: 1 70%;
+}
+button[name="editProfile"] {
+  background: none;
+  color: #FF8F00;
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+}
+button[name="editProfile"]:hover, button[name="editProfile"]:active  {
+  color: #FFA000
+}
+.editProfile a {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+}
 
 /*********************
   Login and Sign up
- ********************/
+*********************/
 
 .photoContainer {
   background: url('/img/background.jpg') center center no-repeat;

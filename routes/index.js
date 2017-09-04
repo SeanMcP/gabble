@@ -233,6 +233,39 @@ router.get('/:username', function(req, res) {
   })
 })
 
+router.get('/:username/edit', function(req, res) {
+  models.User.findOne({
+    where: {
+      username: req.params.username
+    },
+    include: [
+      { model: models.Post, as: 'posts' },
+      { model: models.Like, as: 'likes' }
+    ]
+  }).then(function(data) {
+    res.render('editprofile', {
+      data: data,
+      posts: data.posts,
+      owner: true
+    })
+  })
+})
+
+router.post('/:username/edit', function(req, res) {
+  models.User.update({
+    name: req.body.name,
+    bio: req.body.bio,
+    location: req.body.location
+  }, {
+    where: { username: req.params.username},
+    returning: true,
+    plain: true
+  })
+  .then(function(result) {
+    res.redirect('/' + req.params.username)
+  })
+})
+
 
 
 module.exports = router
