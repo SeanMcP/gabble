@@ -2,7 +2,8 @@
 module.exports = function(sequelize, DataTypes) {
   var Post = sequelize.define('Post', {
     content: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    likeCount: DataTypes.INTEGER
   }, {})
 
   Post.associate = function(models) {

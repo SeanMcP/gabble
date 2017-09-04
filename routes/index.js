@@ -23,7 +23,7 @@ const loginAuthCheck = function(req, res, next) {
   res.redirect('/')
 }
 
-router.get('/', loginAuthCheck, function(req, res) {
+router.get('/', function(req, res) {
   res.render('login', {
     user: req.user,
     messages: res.locals.getMessages()
@@ -84,7 +84,7 @@ router.post('/signup', function(req, res) {
   }
 })
 
-router.get('/feed', isAuthenticated, function(req, res) {
+router.get('/feed', function(req, res) {
   models.Post.findAll({
     order: [['createdAt', 'DESC']],
     include: [
@@ -93,6 +93,7 @@ router.get('/feed', isAuthenticated, function(req, res) {
     ]
   })
   .then(function(data) {
+    // console.log('data', data);
     res.render('feed', { data: data })
   })
 })
@@ -174,10 +175,28 @@ router.get('/like/:postId', function(req, res) {
     if (!req.user) {
       console.log('Not logged in')
     } else if (!arr.includes(req.user.id)) {
+
       models.Like.create({
         userId: req.user.id,
         postId: req.params.postId
       })
+
+      models.Post.findOne({ where: { id: req.params.postId} })
+
+      .then(function(post) {
+        
+        newLikeCount = post.likeCount + 1;
+
+        models.Post.update({ "likeCount": newLikeCount }, {
+          where: { id: req.params.postId},
+          returning: true,
+          plain: true
+        })
+        .then(function(result) {
+          res.send(results)
+        })
+      })
+
       res.redirect('/feed')
     }
   })
@@ -194,7 +213,7 @@ router.get('/:username', function(req, res) {
     ]
   })
   .then(function(data) {
-    // console.log('The data:\n', data);
+    console.log('Data.posts from user page:\n', data.posts);
     if(!req.user) {
       res.render('profile', {
         data: data,

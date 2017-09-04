@@ -21,31 +21,29 @@
 
   <main id="feedContainer">
     {{#posts}}
-    {{#.}}
-    <article class="gab">
-      <header>
-        {{#data}}
-        <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
-        <a class="username" href="/{{username}}">{{name}}</a>
-        {{/data}}
-      </header>
-      <main>
-        {{content}}
-      </main>
-      <footer>
-        <div>
-          <a class="clock-button" href="/gab/{{id}}"><i class="material-icons">schedule</i></a>
-          <a href="/gab/{{id}}">{{createdAt}}</a>
-        </div>
-        <div>
-          <a class="like-button" href="/like/{{id}}"><i class="material-icons">star_border</i></a>
-          {{#data}}
-            <p>{{likes.length}}</p>
-          {{/data}}
-        </div>
-      </footer>
-    </article>
-    {{/.}}
+      {{#.}}
+        <article class="gab">
+          <header>
+            {{#data}}
+            <a class="avatar" href="/{{username}}"><i class="material-icons amber">account_circle</i></a>
+            <a class="username" href="/{{username}}">{{name}}</a>
+            {{/data}}
+          </header>
+          <main>
+            {{content}}
+          </main>
+          <footer>
+            <div>
+              <a class="clock-button" href="/gab/{{id}}"><i class="material-icons">schedule</i></a>
+              <a href="/gab/{{id}}">{{createdAt}}</a>
+            </div>
+            <div>
+              <a class="like-button" href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+              <p>{{likeCount}}</p>
+            </div>
+          </footer>
+        </article>
+      {{/.}}
     {{/posts}}
   </main>
 </section>

@@ -7,25 +7,23 @@
 
 <main id="feedContainer">
   {{#data}}
-  {{#dataValues}}
-  {{#.}}
-  <article class="gab">
-    <header>
-      <a class="avatar" href="/{{user.username}}"><i class="material-icons amber">account_circle</i></a>
-      <a class="username" href="/{{user.username}}">{{user.name}}</a>
-    </header>
-    <main>
-      {{content}}
-    </main>
-    <footer>
-      <a href="/gab/{{id}}">{{createdAt}}</a>
-      <div class="likesContainer">
-        <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
-        <p>{{likes.length}}</p>
-      </div>
-    </footer>
-  </article>
-  {{/.}}
-  {{/dataValues}}
+    {{#.}}
+      <article class="gab">
+        <header>
+          <a class="avatar" href="/{{user.username}}"><i class="material-icons amber">account_circle</i></a>
+          <a class="username" href="/{{user.username}}">{{user.name}}</a>
+        </header>
+        <main>
+          {{content}}
+        </main>
+        <footer>
+          <a href="/gab/{{id}}">{{createdAt}}</a>
+          <div class="likesContainer">
+            <a href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+            <p>{{likes.length}}</p>
+          </div>
+        </footer>
+      </article>
+    {{/.}}
   {{/data}}
 </main>

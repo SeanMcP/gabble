@@ -9,28 +9,28 @@
 
 <main id="feedContainer">
   {{#data}}
-  {{#dataValues}}
-  {{#.}}
-  <article class="gab">
-    <header>
-      <a class="avatar" href="/{{user.username}}"><i class="material-icons amber">account_circle</i></a>
-      <a class="username" href="/{{user.username}}">{{user.name}}</a>
-    </header>
-    <main>
-      {{content}}
-    </main>
-    <footer>
-      <div>
-        <a class="clock-button" href="/gab/{{id}}"><i class="material-icons">schedule</i></a>
-        <a href="/gab/{{id}}">{{createdAt}}</a>
-      </div>
-      <div>
-        <a class="like-button" href="/like/{{id}}"><i class="material-icons">star_border</i></a>
-        <p>{{likes.length}}</p>
-      </div>
-    </footer>
-  </article>
-  {{/.}}
-  {{/dataValues}}
+    {{#dataValues}}
+      {{#.}}
+        <article class="gab">
+          <header>
+            <a class="avatar" href="/{{user.username}}"><i class="material-icons amber">account_circle</i></a>
+            <a class="username" href="/{{user.username}}">{{user.name}}</a>
+          </header>
+          <main>
+            {{content}}
+          </main>
+          <footer>
+            <div>
+              <a class="clock-button" href="/gab/{{id}}"><i class="material-icons">schedule</i></a>
+              <a href="/gab/{{id}}">{{createdAt}}</a>
+            </div>
+            <div>
+              <a class="like-button" href="/like/{{id}}"><i class="material-icons">star_border</i></a>
+              <p>{{likeCount}}</p>
+            </div>
+          </footer>
+        </article>
+      {{/.}}
+    {{/dataValues}}
   {{/data}}
 </main>

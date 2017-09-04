@@ -19,6 +19,10 @@ module.exports = {
       content: {
         type: Sequelize.STRING(140)
       },
+      likeCount: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
