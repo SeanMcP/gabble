@@ -16,32 +16,22 @@ const isAuthenticated = function (req, res, next) {
   }
 
 router.get('/', function(req, res) {
-  models.Post.findAll({
-    order: [['createdAt', 'DESC']],
-    include: [
-      { model: models.User, as: 'user' },
-      { model: models.Like, as: 'likes' }
-    ]
-  })
-  .then(function(data) {
-    res.render('feed', {
-      data: data,
-      user: req.user,
-      messages: res.locals.getMessages(),
-    })
+  res.render('login', {
+    user: req.user,
+    messages: res.locals.getMessages()
   })
 })
 
 router.post('/', passport.authenticate('local', {
     successRedirect: '/feed',
-    failureRedirect: '/login',
+    failureRedirect: '/',
     failureFlash: true
 }))
-let errArr
+
 router.get('/login', function(req, res) {
   console.log('res.locals.getMessages().error: ', res.locals.getMessages().error);
 
-  res.render('index', {
+  res.render('login', {
     user: req.user,
     messages: res.locals.getMessages()
   })
