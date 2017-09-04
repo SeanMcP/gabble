@@ -9,7 +9,9 @@
       </form>
       <p class="loginAlt">Don't have an account? <a href="/signup">Sign up!</a></p>
       {{#messages.error}}
-        <p>{{.}}</p>
+        <div class="errorMessages">
+          <p>{{.}}</p>
+        </div>
       {{/messages.error}}
     </section>
   </section>

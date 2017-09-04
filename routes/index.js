@@ -37,8 +37,6 @@ router.post('/', passport.authenticate('local', {
 }))
 
 router.get('/login', function(req, res) {
-  console.log('res.locals.getMessages().error: ', res.locals.getMessages().error);
-
   res.render('login', {
     user: req.user,
     messages: res.locals.getMessages()
@@ -46,21 +44,42 @@ router.get('/login', function(req, res) {
 })
 
 router.get('/signup', function(req, res) {
-  res.render('signup')
+  res.render('signup', { messages: req.session.messages })
 })
 
-router.post('/signup', function(req, res) {
-  let username = req.body.username
+router.post('/signup', async function(req, res) {
+
+  req.checkBody('username', 'Please choose a username').notEmpty()
+  req.checkBody('password', 'Please choose a password').notEmpty()
+  req.checkBody('username', 'Usernames can only contain letters and numbers').isAlphanumeric()
+  req.checkBody('username', 'Usernames should be between 4 and 20 characters').len(4, 20)
+  req.checkBody('password', 'Passwords should be between 4 and 20 characters').len(4, 20)
+
+  let errors = await req.getValidationResult()
+  let messages = errors.array().map(function(error){
+    return error.msg
+  })
+
+  req.session.messages = messages
+
+  console.log('Are they recognized as errors?\n', messages);
+
+  let username = req.body.username.toLowerCase()
   let password = req.body.password
   let confirm = req.body.confirm
   let name = req.body.name
 
   if (!username || !password) {
-    req.flash('error', 'Please, fill in all the fields.')
+    req.session.messages = []
+    req.session.messages.push('Please fill in all the fields')
     res.redirect('/signup')
   } else if (password !== confirm) {
     req.flash('error', 'Passwords to not match.')
-    res.locals.
+
+    req.session.messages.push('Passwords to not match')
+
+    res.redirect('/signup')
+  } else if (req.session.messages.length >= 1) {
     res.redirect('/signup')
   } else {
 
@@ -74,10 +93,12 @@ router.post('/signup', function(req, res) {
       password: hashedPassword
     }
 
-    models.User.create(newUser).then(function() {
+    models.User.create(newUser)
+    .then(function() {
+      req.session.messages = []
       res.redirect('/')
     }).catch(function(error) {
-      req.flash('error', 'Please, choose a different username.')
+      req.flash('error', 'Please choose a different username.')
       res.redirect('/signup')
     })
 
@@ -93,7 +114,6 @@ router.get('/feed', function(req, res) {
     ]
   })
   .then(function(data) {
-    // console.log('data', data);
     res.render('feed', { data: data })
   })
 })

@@ -46,11 +46,11 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     model.User.findOne({
       where: {
-        'username': username
+        'username': username.toLowerCase()
       }
     }).then(function (user) {
       if (user == null) {
-        return done(null, false, { message: 'Incorrect credentials.' })
+        return done(null, false, { message: 'Invalid email and/or password. Please try again.' })
       }
 
       let hashedPassword = bcrypt.hashSync(password, user.salt)

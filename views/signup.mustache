@@ -8,7 +8,9 @@
     <button type="submit" name="button">Sign Up</button>
   </form>
   <p class="signupAlt">Already have an account? <a href="/login">Login!</a></p>
-  {{#message}}
-  {{.}}
-  {{/message}}
+  {{#messages}}
+    <div class="errorMessages">
+      <p>{{.}}</p>
+    </div>
+  {{/messages}}
 </section>
