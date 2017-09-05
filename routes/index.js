@@ -254,7 +254,8 @@ router.get('/:username', function(req, res) {
       res.render('profile', {
         data: data,
         posts: data.posts,
-        owner: true
+        owner: true,
+        messages: res.locals.getMessages() 
       })
     } else {
       res.render('profile', {
@@ -277,7 +278,8 @@ router.get('/:username/edit', function(req, res) {
     res.render('editprofile', {
       data: data,
       posts: data.posts,
-      owner: true
+      owner: true,
+      messages: res.locals.getMessages()
     })
   })
 })

@@ -5,6 +5,11 @@
       <button type="submit" name="button">Gab</button>
     </form>
   </section>
+  {{#messages.error}}
+    <div class="errorMessages">
+      <p>{{.}}</p>
+    </div>
+  {{/messages.error}}
 {{/owner}}
 
 <section id="profileContainer">
