@@ -111,7 +111,7 @@ router.get('/feed', function(req, res) {
     ]
   })
   .then(function(data) {
-    res.render('feed', { data: data })
+    res.render('feed', { data: data, messages: res.locals.getMessages() })
   })
 })
 
@@ -120,14 +120,30 @@ router.get('/logout', function(req, res) {
   res.redirect('/')
 })
 
-router.post('/create', function(req, res) {
-  models.Post.create({
-    userId: req.user.id,
-    content: req.body.content
+router.post('/create', async function(req, res) {
+
+  req.checkBody('content', 'Gabs must be between 1 and 140 characters').len(1, 140)
+
+  let isError = false
+
+  let errors = await req.getValidationResult()
+
+  errors.array().map(function(error){
+    isError = true
+    req.flash('error', error.msg)
   })
-  .then(function(data) {
+
+  if(isError) {
     res.redirect('back')
-  })
+  } else {
+    models.Post.create({
+      userId: req.user.id,
+      content: req.body.content
+    })
+    .then(function(data) {
+      res.redirect('back')
+    })
+  }
 })
 
 router.get('/gab/:id', function(req, res) {

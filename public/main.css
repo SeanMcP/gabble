@@ -338,7 +338,8 @@ button[name="editProfile"]:hover, button[name="editProfile"]:active  {
 .errorMessages {
   background: pink;
   border: 1px solid red;
-  margin: 10px;
+  margin: 20px auto 10px;
+  max-width: 680px;
   padding: 10px 0;
 }
 .errorMessages > * {
