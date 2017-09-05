@@ -1,6 +1,14 @@
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
 /* BEGIN STYLES */
+
+input:focus, textarea:focus {
+  outline-color: #FFCA28;
+}
+::placeholder {
+  font-weight: 300;
+}
+
 body {
   background: #FAFAFA;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -47,28 +55,38 @@ a:active, a:hover {
 .banner {
   background: #FFF8E1;
   border-bottom: 1px solid #FFE082;
-  padding-top: 10px;
+  padding: 10px 0;
   width: 100%;
 }
+
+/*********************
+  Compose and Gab
+*********************/
+
 #composeGab {
+  align-items: flex-start;
   background: #FFF8E1;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: flex-end;
-  margin: 0 auto 20px;
+  margin: 0 auto;
   max-width: 720px;
   width: 100%;
-}
-#composeGab > * {
-  margin: 10px 20px 0;
 }
 #composeGab textarea {
   background: white;
   border: 1px solid #FFE082;
   border-radius: 4px;
-  flex: 1 90%;
+  flex: 1 80%;
   font-size: 1.5em;
+  height: 30px;
+  margin: 0 10px;
   padding: 10px;
+  resize: none;
+  transition: height 0.2s ease-in-out;
+}
+#composeGab textarea:focus {
+  height: 140px;
 }
 #composeGab button {
   background: #FFC107;
@@ -77,6 +95,8 @@ a:active, a:hover {
   color: white;
   font-size: 1em;
   font-weight: 600;
+  margin-top: 7px;
+  margin-right: 10px;
   max-width: 100px;
   padding: 10px 20px;
 }
