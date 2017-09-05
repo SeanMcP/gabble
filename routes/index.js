@@ -178,20 +178,32 @@ router.get('/gab/:id', function(req, res) {
 })
 
 router.get('/delete/:id', function(req, res) {
-  models.Like.destroy({
-    where: {
-      postId: req.params.id
+  models.Post.findOne({ where: { id: req.params.id } })
+  .then(function(post) {
+
+    if(!req.user) {
+      res.redirect('/gab/' + req.params.id)
+
+    } else if(post.userId === req.user.id) {
+      models.Like.destroy({
+        where: {
+          postId: req.params.id
+        }
+      })
+      .then(function(likes) {
+        models.Post.destroy({
+          where: {
+            id: req.params.id
+          }
+        })
+        .then(function(data) {
+          res.redirect('/feed')
+        })
+      })
+
+    } else {
+      res.redirect('/gab/' + req.params.id)
     }
-  })
-  .then(function(likes) {
-    models.Post.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-    .then(function(data) {
-      res.redirect('/feed')
-    })
   })
 })
 
