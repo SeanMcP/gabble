@@ -229,6 +229,25 @@ router.get('/like/:postId', function(req, res) {
           res.redirect('/gab/' + req.params.postId)
         })
       })
+    } else {
+
+      models.Post.findOne({ where: { id: req.params.postId} })
+
+      .then(function(post) {
+
+        decreaseLike = post.likeCount - 1;
+
+        models.Post.update({ "likeCount": decreaseLike }, {
+          where: { id: req.params.postId},
+          returning: true,
+          plain: true
+        })
+
+        models.Like.destroy({ where: { postId: req.params.postId, userId: req.user.id } })
+        .then(function(data) {
+          res.redirect('back')
+        })
+      })
     }
   })
 })
@@ -255,7 +274,7 @@ router.get('/:username', function(req, res) {
         data: data,
         posts: data.posts,
         owner: true,
-        messages: res.locals.getMessages() 
+        messages: res.locals.getMessages()
       })
     } else {
       res.render('profile', {
