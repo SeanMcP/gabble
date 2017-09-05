@@ -15,14 +15,6 @@ const isAuthenticated = function (req, res, next) {
   res.redirect('/')
 }
 
-const loginAuthCheck = function(req, res, next) {
-  if (req.isAuthenticated()) {
-    res.redirect('/feed')
-  }
-  req.flash('error', 'You have to be logged in to access the page.')
-  res.redirect('/')
-}
-
 router.get('/', function(req, res) {
   res.render('login', {
     user: req.user,
@@ -335,7 +327,5 @@ router.post('/:username/edit', function(req, res) {
     res.redirect('/' + req.params.username)
   })
 })
-
-
 
 module.exports = router
