@@ -285,22 +285,28 @@ router.get('/:username', function(req, res) {
 })
 
 router.get('/:username/edit', function(req, res) {
-  models.User.findOne({
-    where: {
-      username: req.params.username
-    },
-    include: [
-      { model: models.Post, as: 'posts' },
-      { model: models.Like, as: 'likes' }
-    ]
-  }).then(function(data) {
-    res.render('editprofile', {
-      data: data,
-      posts: data.posts,
-      owner: true,
-      messages: res.locals.getMessages()
+  if(!req.user) {
+    res.redirect('/' + req.params.username)
+  } else if(req.user.username === req.params.username) {
+    models.User.findOne({
+      where: {
+        username: req.params.username
+      },
+      include: [
+        { model: models.Post, as: 'posts' },
+        { model: models.Like, as: 'likes' }
+      ]
+    }).then(function(data) {
+      res.render('editprofile', {
+        data: data,
+        posts: data.posts,
+        owner: true,
+        messages: res.locals.getMessages()
+      })
     })
-  })
+  } else {
+    res.redirect('/' + req.params.username)
+  }
 })
 
 router.post('/:username/edit', function(req, res) {
